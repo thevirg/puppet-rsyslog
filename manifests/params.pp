@@ -245,6 +245,41 @@ class rsyslog::params {
       $im_journal_ignore_previous_messages = undef
       $im_journal_statefile                = undef
     }
+    'Archlinux': {
+      $rsyslog_package_name                = 'rsyslog'
+      $relp_package_name                   = false
+      $mysql_package_name                  = false
+      $pgsql_package_name                  = false
+      $gnutls_package_name                 = false
+      $package_status                      = 'present'
+      $rsyslog_d                           = '/usr/local/etc/rsyslog.d/'
+      $rsyslog_conf                        = '/etc/rsyslog.conf'
+      $rsyslog_default                     = '/usr/lib/systemd/systemd-journald'
+      $default_config_file                 = 'rsyslog_default'
+      $run_user                            = 'root'
+      $run_group                           = 'wheel'
+      $log_user                            = 'root'
+      $log_group                           = 'wheel'
+      $log_style                           = 'debian'
+      $umask                               = false
+      $perm_file                           = '0640'
+      $perm_dir                            = '0755'
+      $spool_dir                           = '/var/spool/rsyslog'
+      $service_name                        = 'rsyslog'
+      $modules                             = [
+        '$ModLoad imuxsock # provides support for local system logging',
+        '$ModLoad imklog   # provides kernel logging support (previously done by rklogd)',
+        '#$ModLoad immark  # provides --MARK-- message capability',
+        '$ModLoad imjournal # provides syslog access with Arch',
+      ]
+      $service_hasrestart                  = true
+      $service_hasstatus                   = true
+      $omit_local_logging                  = false
+      $im_journal_ratelimit_interval       = undef
+      $im_journal_ratelimit_burst          = undef
+      $im_journal_ignore_previous_messages = undef
+      $im_journal_statefile                = undef
+    }
     default: {
       case $::operatingsystem {
         'Gentoo': {
